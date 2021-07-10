@@ -1,7 +1,7 @@
-import { hello } from "./hello";
+import { searchCountryResolver } from "./country";
 
 export default {
   Query: {
-    hello,
+    searchCountries: searchCountryResolver,
   },
 };
