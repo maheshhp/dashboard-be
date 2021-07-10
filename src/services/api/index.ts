@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CountrySearchRes } from "./api.types";
-import { getCountriesSearchUrl } from "./config";
+import { CountrySearchRes, CurrencyRatesRes } from "./api.types";
+import { getCountriesSearchUrl, getCurrencyRatesUrl } from "./config";
 
 // Generic request method to fetch data from downstream services
 const makeRequest = async (
@@ -45,5 +45,36 @@ export const searchCountries = async (
       throw new Error("COUNTRY_NOT_FOUND_ERROR");
     }
     throw new Error("COUNTRY_FETCH_ERROR");
+  }
+};
+
+export const getCurrencyRates = async (
+  currencySymbols: Array<string>
+): Promise<CurrencyRatesRes> => {
+  try {
+    const currencySymbolString = currencySymbols.join(",");
+    const currencyRatesRes = await makeRequest(
+      getCurrencyRatesUrl(),
+      "get",
+      null,
+      {},
+      {
+        symbols: currencySymbolString,
+        access_key: String(process.env.CURRENCY_API_KEY),
+      }
+    );
+    if (!currencyRatesRes.success) {
+      throw new Error(currencyRatesRes.error?.info);
+    }
+    return {
+      base: currencyRatesRes.base,
+      rates: Object.keys(currencyRatesRes.rates).map((key: string) => ({
+        country: key,
+        rate: currencyRatesRes.rates[key],
+      })),
+    };
+  } catch (error) {
+    console.error(error.message);
+    throw new Error("CURRENCY_FETCH_ERROR");
   }
 };

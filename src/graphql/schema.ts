@@ -12,7 +12,16 @@ export const typeDefs = gql`
     population: Float!
     currencies: [CountryCurrency!]!
   }
+  type Rate {
+    country: String!
+    rate: Float!
+  }
+  type CurrencyRates {
+    base: String!
+    rates: [Rate!]
+  }
   type Query {
     searchCountries(countryName: String!): [Country]
+    currencyRates(currencySymbols: [String!]): CurrencyRates
   }
 `;

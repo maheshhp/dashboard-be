@@ -11,3 +11,13 @@ export interface CountrySearchRes {
   population: number;
   currencies: Array<SearchCurrency>;
 }
+
+// Currency rates API response types
+interface Rate {
+  country: string;
+  rate: number;
+}
+export interface CurrencyRatesRes {
+  base: string;
+  rates: Array<Rate>;
+}
