@@ -6,7 +6,10 @@
   "scripts": {
     "start:dev": "NODE_ENV=development nodemon -r dotenv/config src/index.ts",
     "build": "NODE_ENV=production tsc --project .",
-    "lint:fix": "eslint --fix src/**/*.ts"
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "prettier:write": "prettier --write .",
+    "check-types": "tsc",
+    "prepare": "husky install"
   },
   "author": "maheshhp",
   "license": "ISC",
@@ -29,7 +32,7 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^7.0.1",
+    "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
     "nodemon": "^2.0.10",
     "prettier": "^2.3.2",
@@ -37,11 +40,9 @@
     "typescript": "^4.3.5"
   },
   "lint-staged": {
-    "src/**/*.ts": ["yarn lint:fix"]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "src/**/*.ts": [
+      "yarn lint:fix",
+      "yarn prettier:write"
+    ]
   }
 }

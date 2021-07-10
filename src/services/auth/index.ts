@@ -1,14 +1,22 @@
 import { Application } from "express";
 import expressJwt from "express-jwt";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET, JWT_ALGORITHM, JWT_VALIDITY } from "./constants";
 
 export const attachJwtAuthMw = (app: Application): void => {
   app.use(
     expressJwt({
-      secret: String(process.env.JWT_SECRET),
-      algorithms: ["HS256"],
+      secret: JWT_SECRET,
+      algorithms: [JWT_ALGORITHM],
     }).unless({
-      // TODO: Remove graphql route once auth route done
-      path: ["/login", "/graphql"],
+      path: ["/login"],
     })
   );
+};
+
+export const generateAuthToken = (email: string): string => {
+  return jwt.sign({ email }, JWT_SECRET, {
+    algorithm: JWT_ALGORITHM,
+    expiresIn: JWT_VALIDITY,
+  });
 };

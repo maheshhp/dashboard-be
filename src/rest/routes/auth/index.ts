@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
+import { generateAuthToken } from "../../../services/auth";
 
 export const login = (request: Request, response: Response): void => {
-  // TODO: Implement JWT generation logic
-  response.send("Login success");
+  const userEmail: string = request.body?.email;
+  if (!userEmail) {
+    response.status(400).send({ error: "No/Invalid email address" });
+  } else {
+    response.send({ token: generateAuthToken(userEmail) });
+  }
 };
