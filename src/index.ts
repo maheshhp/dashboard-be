@@ -2,6 +2,7 @@ import express from "express";
 import { attchGqlMw } from "./graphql";
 import { registerRoutes } from "./rest/routes";
 import { attachJwtAuthMw } from "./services/auth";
+import { rateLimiter } from "./services/rateLimiter";
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 8080;
@@ -11,6 +12,9 @@ app.use(express.json());
 
 // Setting up JWT auth for all routes except /login
 attachJwtAuthMw(app);
+
+// Attach rate limiter to graphql routes
+app.use("/graphql", rateLimiter);
 
 // Setting up GQL middleware
 attchGqlMw(app);
