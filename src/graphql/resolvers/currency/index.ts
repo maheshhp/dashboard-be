@@ -1,5 +1,4 @@
-import { CurrencyRatesRes } from "../../../services/api/api.types";
-import { getCurrencyRates } from "../../../services/api";
+import { getCurrencyRates, CurrencyRatesRes } from "../../../services/api";
 
 export const currencyRatesResolver = async (
   parent: any,

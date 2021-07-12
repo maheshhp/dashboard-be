@@ -23,7 +23,7 @@ const makeRequest = async (
   return response.data;
 };
 
-export const searchCountries = async (
+const searchCountries = async (
   countryName: string
 ): Promise<Array<CountrySearchRes>> => {
   try {
@@ -48,7 +48,7 @@ export const searchCountries = async (
   }
 };
 
-export const getCurrencyRates = async (
+const getCurrencyRates = async (
   currencySymbols: Array<string>
 ): Promise<CurrencyRatesRes> => {
   try {
@@ -77,4 +77,11 @@ export const getCurrencyRates = async (
     console.error(error.message);
     throw new Error("CURRENCY_FETCH_ERROR");
   }
+};
+
+export {
+  searchCountries,
+  getCurrencyRates,
+  CountrySearchRes,
+  CurrencyRatesRes,
 };

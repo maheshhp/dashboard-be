@@ -1,5 +1,4 @@
-import { searchCountries } from "../../../services/api";
-import { CountrySearchRes } from "../../../services/api/api.types";
+import { searchCountries, CountrySearchRes } from "../../../services/api";
 
 export const searchCountryResolver = async (
   parent: any,
