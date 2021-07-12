@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { attchGqlMw } from "./graphql";
 import { registerRoutes } from "./rest/routes";
 import { attachJwtAuthMw } from "./services/auth";
@@ -9,6 +10,13 @@ const PORT = process.env.SERVER_PORT || 8080;
 
 // Add request body JSON parsing
 app.use(express.json());
+
+// Allow CORS for running FE locally
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
 
 // Setting up JWT auth for all routes except /login
 attachJwtAuthMw(app);

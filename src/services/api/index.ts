@@ -33,7 +33,7 @@ export const searchCountries = async (
       null,
       {},
       {
-        fields: "name;population;currencies",
+        fields: "name;alpha3Code;population;currencies",
       }
     );
     return searchRes;
