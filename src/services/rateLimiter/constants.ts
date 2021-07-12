@@ -1,3 +1,2 @@
 export const WINDOW_SIZE_IN_MINS = 1;
-export const RECORD_LOG_INTERVAL_IN_SECONDS = 10;
 export const MAX_REQUEST_COUNT_PER_WINDOW = 30;
