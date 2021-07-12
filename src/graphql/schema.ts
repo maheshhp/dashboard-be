@@ -13,7 +13,7 @@ export const typeDefs = gql`
     currencies: [CountryCurrency!]!
   }
   type Rate {
-    country: String!
+    code: String!
     rate: Float!
   }
   type CurrencyRates {

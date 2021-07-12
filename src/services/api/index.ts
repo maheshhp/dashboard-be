@@ -69,7 +69,7 @@ export const getCurrencyRates = async (
     return {
       base: currencyRatesRes.base,
       rates: Object.keys(currencyRatesRes.rates).map((key: string) => ({
-        country: key,
+        code: key,
         rate: currencyRatesRes.rates[key],
       })),
     };

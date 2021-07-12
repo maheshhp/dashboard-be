@@ -14,7 +14,7 @@ export interface CountrySearchRes {
 
 // Currency rates API response types
 interface Rate {
-  country: string;
+  code: string;
   rate: number;
 }
 export interface CurrencyRatesRes {
